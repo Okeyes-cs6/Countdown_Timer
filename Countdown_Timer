@@ -1,0 +1,25 @@
+import time
+import pygame
+
+def countdown(t,sound):
+    while t:
+        mins, secs = divmod(t, 60)
+        timer = '{:02d}:{:02d}'.format(mins, secs)
+        print(timer, end="\r")
+        time.sleep(1)
+        t -= 1
+
+    print('Timer completed!')
+
+    pygame.mixer.init()
+    pygame.mixer.music.load(sound)
+    pygame.mixer.music.play(-1)
+
+    end = input("Enter 'y' to exit: ")
+    if end.lower() == "y":
+        pygame.mixer.stop()
+        print("The alarm has been stopped!")
+
+
+t = int(input("Enter time in seconds: "))
+countdown(t, "[insert mp4 here]")
